@@ -1,0 +1,3 @@
+backend:
+  name: github
+  repo: ymorisaki/gatsby-site
