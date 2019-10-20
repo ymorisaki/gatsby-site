@@ -1,5 +1,6 @@
 import { Link, useStaticQuery, graphql } from "gatsby"
 import React from "react"
+import styled from 'styled-components'
 
 const Header = () => {
   const data = useStaticQuery(
@@ -15,57 +16,60 @@ const Header = () => {
   )
 
   return (
-    <header style={headerStyle}>
-      <div style={innerStyle}>
-        <h1 style={hdgStyle}>
-          <Link to="/" style={linkStyle}>{ data.site.siteMetadata.title }</Link>
-        </h1>
-        <ul style={listStyle}>
-          <li style={list}><Link to="/" style={listLink}>Home</Link></li>
-          <li style={list}><Link to="/about/" style={listLink}>About</Link></li>
-          <li style={list}><Link to="/contact/" style={listLink}>Contact</Link></li>
-        </ul>
+    <StyledHeader className="header">
+      <div className="header__inner">
+        <Hdg>
+          <Link to="/">{ data.site.siteMetadata.title }</Link>
+        </Hdg>
+        <List>
+          <li><Link to="/">Home</Link></li>
+          <li><Link to="/about/">About</Link></li>
+          <li><Link to="/contact/">Contact</Link></li>
+        </List>
       </div>
-    </header>
+    </StyledHeader>
   )
 }
 
-const headerStyle = {
-  width: `100%`,
-  backgroundColor: `#ccc`,
-}
+const StyledHeader = styled.header`
+  width: 100%;
+  background-color: #ccc;
 
-const innerStyle = {
-  display: `flex`,
-  alignItems: `center`,
-  justifyContent: `space-between`,
-  maxWidth: `1000px`,
-  margin: `auto`,
-  padding: `30px 15px`
-}
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1000px;
+    margin: auto;
+    padding: 30px 15px;
+  }
+`
 
-const hdgStyle = {
-  margin: `0`
-}
+const Hdg = styled.h1`
+  margin: 0;
 
-const linkStyle = {
-  textDecoration: `none`,
-  color: `#000`
-}
+  > a {
+    color: #000;
+    text-decoration: none;
+  }
+`
 
-const listStyle = {
-  display: `flex`,
-  margin: `0`
-}
+const List = styled.ul`
+  display: flex;
+  margin: 0;
 
-const list = {
-  listStyle: `none`,
-}
+  > li {
+    list-style: none;
 
-const listLink = {
-  color: `#000`,
-  marginRight: `10px`,
-  marginBottom: `0`
-}
+    &:nth-child(n + 2) {
+      margin-left: 10px;
+    }
+
+    > a {
+      text-decoration: none;
+      color: #000;
+    }
+  }
+`
 
 export default Header
